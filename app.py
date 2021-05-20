@@ -11,7 +11,12 @@ app.config['MYSQL_DB'] = "bankkita"
 
 mysql = MySQL(app)
 
-@app.route('/', methods=['GET','POST'])
+@app.route('/', methods=['GET'])
+def base():
+    return render_template("base.html")
+
+
+@app.route('/sign-up', methods=['GET','POST'])
 def index():
 
     if request.method == 'POST' :
