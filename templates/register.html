@@ -1,59 +1,52 @@
-{% extends "base.html" %} {% block title %}Login{% endblock %}
+<!DOCTYPE html>
+<form method="post" action="/">
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='register.css')}}">
+  </head>
+  <body>
+    <div class="center">
+      <h1>REGISTER</h1>
+      <form method="post">
+        <div class="txt_field">
+          <input type="text" required>
+          <span></span>
+          <label>ID</label>
+        </div>
+        <div class="txt_field">
+          <input type="text" required>
+          <span></span>
+          <label>Name</label>
+        </div>
+        <div class="txt_field">
+          <input type="text" required>
+          <span></span>
+          <label>Alamat</label>
+        </div>
+        <div class="txt_field">
+          <input type="text" required>
+          <span></span>
+          <label>Phone</label>
+        </div>
+        <div class="txt_field">
+          <input type="text" required>
+          <span></span>
+          <label>Email Address</label>
+        </div>
+        <div class="txt_field">
+          <input type="password" required>
+          <span></span>
+          <label>Password</label>
+        </div>
+        <input type="submit" value="Login">
+        <div class="signup_link">
+          <a href="#"></a>
+        </div>
+      </form>
+    </div>
 
-{% block content %}
-<form method="POST" action="/">
-    <h3 align="center">REGISTER</h3>
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input
-        type="text"
-        class="form-control"
-        id="username"
-        name="username"
-        placeholder="Enter Username"
-      />
-    </div>
-    <div class="form-group">
-      <label for="alamat">Alamat</label>
-      <input
-        type="text"
-        class="form-control"
-        id="alamat"
-        name="alamat"
-        placeholder="Enter Alamat"
-      />
-    </div>
-    <div class="form-group">
-      <label for="phone">Phone</label>
-      <input
-        type="text"
-        class="form-control"
-        id="phone"
-        name="phone"
-        placeholder="Enter a phone number"
-      />
-    </div>
-    <div class="form-group">
-      <label for="email">Email Address</label>
-      <input
-        type="email"
-        class="form-control"
-        id="email"
-        name="email"
-        placeholder="Enter Email"
-      />
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input
-        type="password"
-        class="form-control"
-        id="password"
-        name="password"
-        placeholder="Enter Password"
-      />
-    </div>
-    <br />
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-  {% endblock %}
+  </body>
+</html>
+</form>
