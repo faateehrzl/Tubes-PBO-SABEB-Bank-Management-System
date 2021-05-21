@@ -16,7 +16,7 @@ def base():
     return render_template("base.html")
 
 
-@app.route('/sign-up', methods=['GET','POST'])
+@app.route('/register', methods=['GET','POST'])
 def index():
 
     if request.method == 'POST' :
@@ -36,7 +36,7 @@ def index():
 
         return "succes"
 
-    return render_template("sign_up.html")
+    return render_template("register.html")
 
 @app.route('/login', methods=['GET','POST'])
 def login():
