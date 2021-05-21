@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.config['MYSQL_HOST'] = "localhost"
 app.config['MYSQL_USER'] = "root"
 app.config['MYSQL_PASSWORD'] = ""
-app.config['MYSQL_DB'] = "bankkita"
+app.config['MYSQL_DB'] = "bankita"
 
 mysql = MySQL(app)
 
@@ -16,19 +16,20 @@ def base():
     return render_template("base.html")
 
 
-@app.route('/register', methods=['GET','POST'])
+@app.route('/register/', methods=['GET','POST'])
 def index():
 
     if request.method == 'POST' :
-        username = request.form['username']
-        alamat = request.form['alamat']
-        phone = request.form['phone']
-        email = request.form['email']
-        password = request.form['password']
+        Customer_id = request.form['customer_id']
+        Customer_name = request.form['customer_name']
+        Address = request.form['address']
+        Phone = request.form['phone']
+        Email = request.form['email']
+        Password = request.form['password']
 
         cur = mysql.connection.cursor()
 
-        cur.execute("INSERT INTO customer (username, alamat, phone, email, password) VALUES (%s,%s,%s,%s,%s)", (username, alamat, phone, email, password))
+        cur.execute("INSERT INTO cutomer  (Customer_id, Customer_name, Address, Phone, Email, Password) VALUES (%s,%s,%s,%s,%s,%s)", (Customer_id, Customer_name, Address, Phone, Email, Password))
 
         mysql.connection.commit()
 
