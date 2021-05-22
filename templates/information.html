@@ -1,20 +1,22 @@
 <HTML>
     <BODY>
-        <form method="post" action="/information/">
+        <form method="GET" action="/information">
     <table>
      <thead>
      <tr>
-      <th>pendapatan</th>
-      <th>pengeluaran</th>
-      <th>biayaiklan</th>
+      <th>Cusomer id</th>
+      <th>Account id</th>
+      <th>Type</th>
+      <th>Belance</th>
      </tr>
      </thead>
      <tbody>
-      {% for row in value %}
+      {% for i in info %}
        <tr>
-        <td>{{row[0]}}</td>
-        <td>{{row[1]}}</td>
-        <td>{{row[2]}}</td>
+        <td>{{i[0]}}</td>
+        <td>{{i[1]}}</td>
+        <td>{{i[2]}}</td>
+        <td>{{i[3]}}</td>
        </tr>
       {% endfor %}
      </tbody>

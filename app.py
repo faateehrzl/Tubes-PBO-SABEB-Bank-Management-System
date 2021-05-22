@@ -112,13 +112,12 @@ def loginadmin():
     else:
         return render_template("loginAdmin.html")
 
-@app.route('/information/', methods=['POST'])
+@app.route('/information', methods=['GET'])
 def information():
     cur = mysql.connection.cursor()
     cur.execute("SELECT * from account ")
     rv = cur.fetchall()
-
-    return render_template("information", value=rv)
+    return render_template("information.html", info=rv)
 
 
 if __name__ == "__main__":
