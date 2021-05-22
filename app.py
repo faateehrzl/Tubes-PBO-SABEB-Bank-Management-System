@@ -71,6 +71,11 @@ def login():
     else:
         return render_template("loginCustomer.html")
 
+@app.route('/base.html/', methods=['GET'])
+def logoutcutomer():
+
+    return render_template("base.html")
+
 @app.route('/loginAdmin/', methods=['GET'])
 def loginadmin():
 
