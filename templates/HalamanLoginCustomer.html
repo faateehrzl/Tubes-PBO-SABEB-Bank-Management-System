@@ -2,7 +2,7 @@
 <form method="post" action="/">
 <head>
       <meta charset="utf-8">
-      <title>Dropdown Menu</title>
+      <title>Menu Costomer</title>
       <link rel="stylesheet" href="{{url_for('static',filename='base.css')}}">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
    </head>
@@ -11,15 +11,15 @@
          <label class="logo">BANKITA</label>
          <ul>
             <li><a class="active" href="#">Home</a></li>
-            <li><a href="#">Login
+            <li><a href="#">Data
                <i class="fas fa-caret-down"></i>
                </a>
                <ul>
-                  <li><a id="loginAdmin" href="/loginAdmin">Admin</a></li>
-                  <li><a id="login" href="/loginCustomer">Customer</a></li>
+                  <li><a id="information" href="#">Information</a></li>
+                  <li><a id="transaction" href="#">Transaction</a></li>
                </ul>
             </li>
-            <li><a id="register" href="/register">Register</a></li>
+            <li><a id="logout" href="#">Logout</a></li>
          </ul>
       </nav>
       <section></section>
