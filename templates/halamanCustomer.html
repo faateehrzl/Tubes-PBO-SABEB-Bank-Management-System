@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<form method="post" action="/halamanCustomer/">
+<head>
+      <meta charset="utf-8">
+      <title>Menu Costomer</title>
+      <link rel="stylesheet" href="{{url_for('static',filename='halamanCustomer.css')}}">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+   </head>
+   <body>
+      <nav>
+         <label class="logo">BANKITA</label>
+         <ul>
+            <li><a class="active" href="#">Account
+               <i class="fas fa-caret-down"></i>
+               </a>
+               <ul>
+                   <li><a id="transaction" href="#">Deposit</a></li>
+                   <li><a id="information" href="#">Balance and Query</a></li>
+                   <li><a id="transaction" href="#">Whitdraw</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Data
+               <i class="fas fa-caret-down"></i>
+               </a>
+               <ul>
+                  <li><a id="information" href="#">Information</a></li>
+                  <li><a id="transaction" href="#">Transaction</a></li>
+               </ul>
+            </li>
+            <li><a id="logout" href="/base.html">Logout</a></li>
+         </ul>
+      </nav>
+      <section></section>
+   </body>
+</form>
