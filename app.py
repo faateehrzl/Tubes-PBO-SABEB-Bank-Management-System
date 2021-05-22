@@ -81,8 +81,8 @@ def loginadmin():
 
     
     if request.method == 'POST' :
-        Username = request.form['Username']
-        Password = request.form['Password']
+        Username = request.form['username']
+        Password = request.form['password']
         
         cur = mysql.connection.cursor()
 
@@ -99,10 +99,10 @@ def loginadmin():
         if accept_Login == False:
 
             return render_template("loginAdmin.html")
-        elif Email == rows[0][0] and Password == rows[0][1]:
+        elif Username == rows[0][0] and Password == rows[0][1]:
             accept_Login = True
 
-            return "sukses coi"
+            return render_template("halamanAdmin.html")
         
         con.close()
 

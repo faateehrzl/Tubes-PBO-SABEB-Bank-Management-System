@@ -3,7 +3,7 @@
 <head>
       <meta charset="utf-8">
       <title>Menu Costomer</title>
-      <link rel="stylesheet" href="{{url_for('static',filename='halamanCustomer.css')}}">
+      <link rel="stylesheet" href="{{url_for('static',filename='halamanAdmin.css')}}">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
    </head>
    <body>
@@ -15,8 +15,8 @@
                <i class="fas fa-caret-down"></i>
                </a>
                <ul>
-                  <li><a id="information" href="#">Information</a></li>
-                  <li><a id="transaction" href="#">Transaction</a></li>
+                  <li><a name="information" href="#">Information</a></li>
+                  <li><a name="transaction" href="#">Transaction</a></li>
                </ul>
             </li>
             <li><a id="logout" href="/base.html">Logout</a></li>
