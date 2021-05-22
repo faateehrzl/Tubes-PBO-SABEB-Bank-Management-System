@@ -25,11 +25,14 @@ def register():
         Address = request.form['address']
         Phone = request.form['phone']
         Email = request.form['email']
-        Password = request.form['password'].encode('utf-8')
+        Password = request.form['password']
+        Type = request.form['Type']
+        Account_id = request.form['customer_id']
 
         cur = mysql.connection.cursor()
 
-        cur.execute("INSERT INTO cutomer  (Customer_id, Customer_name, Address, Phone, Email, Password) VALUES (%s,%s,%s,%s,%s,%s)", (Customer_id, Customer_name, Address, Phone, Email, Password))
+        cur.execute("INSERT INTO customer  (Customer_id, Customer_name, Address, Phone, Email, Password) VALUES (%s,%s,%s,%s,%s,%s)", (Customer_id, Customer_name, Address, Phone, Email, Password))
+        cur.execute("INSERT INTO account  (Account_id, Customer_id, type) VALUES (%s,%s,%s)", (Account_id, Customer_id, Type))
 
         mysql.connection.commit()
 
@@ -48,7 +51,7 @@ def logincustomer():
         
         cur = mysql.connection.cursor()
 
-        query = 'SELECT Email, Password FROM cutomer \
+        query = 'SELECT Email, Password FROM customer \
         where Email=\'%s\' and Password=\'%s\' '
         query = query % (Email, Password)
         cur.execute(query)
@@ -66,7 +69,7 @@ def logincustomer():
 
             return render_template("halamanCustomer.html")
         
-        con.close()
+        cor.close()
 
     else:
         return render_template("loginCustomer.html")
@@ -104,20 +107,18 @@ def loginadmin():
 
             return render_template("halamanAdmin.html")
         
-        con.close()
+        cor.close()
 
     else:
         return render_template("loginAdmin.html")
 
-
-@app.route('/edit/<id>', methods = ['POST', 'GET'])
-def get_contact(id):
+@app.route('/information/', methods=['POST'])
+def information():
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM cutomer WHERE id = %s', (id))
-    data = cur.fetchall()
-    cur.close()
-    print(data[0])
-    return render_template('edit-contact.html', contact = data[0])
+    cur.execute("SELECT * from account ")
+    rv = cur.fetchall()
+
+    return render_template("information", value=rv)
 
 
 if __name__ == "__main__":
