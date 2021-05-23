@@ -2,7 +2,6 @@ from flask import Flask, render_template,request,redirect,url_for
 from flask_mysqldb import MySQL,MySQLdb
 import datetime
 
-
 app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = "localhost"
@@ -31,9 +30,10 @@ def register():
         Account_id = request.form['customer_id']
 
         cur = mysql.connection.cursor()
-
+        
         cur.execute("INSERT INTO customer  (Customer_id, Customer_name, Address, Phone, Email, Password) VALUES (%s,%s,%s,%s,%s,%s)", (Customer_id, Customer_name, Address, Phone, Email, Password))
         cur.execute("INSERT INTO account  (Account_id, Customer_id, type) VALUES (%s,%s,%s)", (Account_id, Customer_id, Type))
+        cur.execute("INSERT INTO transaction  (Account_id, Password) VALUES (%s,%s)", (Account_id, Password))
 
         mysql.connection.commit()
 
@@ -68,12 +68,18 @@ def logincustomer():
         elif Email == rows[0][0] and Password == rows[0][1]:
             accept_Login = True
 
-            return render_template("halamanCustomer.html")
+            return redirect("/halamanCustomer")
+
         
-        cor.close()
+        cur.close()
 
     else:
         return render_template("loginCustomer.html")
+
+@app.route('/halamanCustomer', methods=['GET'])
+def Custom():
+
+    return render_template("halamanCustomer.html")
 
 @app.route('/base.html/', methods=['GET'])
 def logoutcutomer():
@@ -108,7 +114,7 @@ def loginadmin():
 
             return render_template("halamanAdmin.html")
         
-        cor.close()
+        cur.close()
 
     else:
         return render_template("loginAdmin.html")
@@ -125,27 +131,39 @@ def information():
 def deposit():
 
     if request.method == 'POST' :
-        Amount = request.form['amount']
+        Amount = request.form['account_id']
         Transaction_type = request.form['transaction_type']
+        Amount = request.form['amount']
+        Amount = request.form['password']
         x = datetime.datetime.now()
         Data_time = x
         cur = mysql.connection.cursor()
         
-        cur.execute("INSERT INTO transaction  (Amount,Data_time , Transaction_type) VALUES (%s,%s,%s)", (Amount, Data_time, Transaction_type))
-        
+        cur.execute("INSERT INTO transaction  (Amount, Date_time , Transaction_type) VALUES (%s,%s,%s)", (Amount, Date_time, Transaction_type))
+        query = 'SELECT username, Password FROM admin \
+        where username=\'%s\' and Password=\'%s\' '
+        query = query % (Username, Password)
+        cur.execute(query)
         mysql.connection.commit()
-        cur.close()
+        rows =cur.fetchall()
+        accept_Login = True
+        if (len(rows)) == 0:
+            accept_Login = False
+
+        if accept_Login == False:
+            return render_template("loginAdmin.html")
+
+        elif Username == rows[0][0] and Password == rows[0][1]:
+            accept_Login = True
         
         return render_template("halamanCustomer.html")
-
+        cur.close()
     return render_template("deposit.html")
 
 @app.route('/infoAccount', methods=['GET'])
 def infoAccount():
     cur = mysql.connection.cursor()
-    cur.execute("SELECT account.Account_id, customer.Customer_name, account.Balance \
-                FROM account, customer \
-                WHERE account.Account_id=customer.Customer_name")
+    cur.execute("SELECT account.Account_id, customer.Customer_name, account.Balance from account natural join customer")
     rv = cur.fetchall()
     return render_template("infoAccount.html", info=rv)
 
