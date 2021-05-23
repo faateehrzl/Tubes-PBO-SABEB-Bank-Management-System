@@ -1,27 +1,26 @@
-<HTML>
-    <BODY>
+<!DOCTYPE html>
+<html>
+    <head>
         <form method="GET" action="/information">
-    <table>
-     <thead>
-     <tr>
-      <th>Cusomer id</th>
-      <th>Account id</th>
-      <th>Type</th>
-      <th>Belance</th>
-     </tr>
-     </thead>
-     <tbody>
-      {% for i in info %}
-       <tr>
-        <td>{{i[0]}}</td>
-        <td>{{i[1]}}</td>
-        <td>{{i[2]}}</td>
-        <td>{{i[3]}}</td>
-       </tr>
-      {% endfor %}
-     </tbody>
-    </table>
-        </form>
-    </BODY>
-</HTML>
+            <title>Informasi</title>
+            <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='information.css')}}">
+    </head>
+    <body>
+        <table>
+            <th>Cusomer id</th>
+            <th>Account id</th>
+            <th>Type</th>
+            <th>Belance</th>
+
+        {% for i in info %}
+         <tr>
+            <td>{{i[0]}}</td>
+            <td>{{i[1]}}</td>
+            <td>{{i[2]}}</td>
+            <td>{{i[3]}}</td>
+         </tr>
+        {% endfor %}
+        </table>
+    </body>
+</html>
     
