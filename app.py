@@ -1,6 +1,7 @@
 from flask import Flask, render_template,request,redirect,url_for
 from flask_mysqldb import MySQL,MySQLdb
-import bcrypt 
+import datetime
+
 
 app = Flask(__name__)
 
@@ -48,7 +49,7 @@ def logincustomer():
     if request.method == 'POST' :
         Email = request.form['email']
         Password = request.form['password']
-        
+                
         cur = mysql.connection.cursor()
 
         query = 'SELECT Email, Password FROM customer \
@@ -119,6 +120,34 @@ def information():
     rv = cur.fetchall()
     return render_template("information.html", info=rv)
 
+
+@app.route('/deposit/', methods=['GET','POST'])
+def deposit():
+
+    if request.method == 'POST' :
+        Amount = request.form['amount']
+        Transaction_type = request.form['transaction_type']
+        x = datetime.datetime.now()
+        Data_time = x
+        cur = mysql.connection.cursor()
+        
+        cur.execute("INSERT INTO transaction  (Amount,Data_time , Transaction_type) VALUES (%s,%s,%s)", (Amount, Data_time, Transaction_type))
+        
+        mysql.connection.commit()
+        cur.close()
+        
+        return render_template("halamanCustomer.html")
+
+    return render_template("deposit.html")
+
+@app.route('/infoAccount', methods=['GET'])
+def infoAccount():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT account.Account_id, customer.Customer_name, account.Balance \
+                FROM account, customer \
+                WHERE account.Account_id=customer.Customer_name")
+    rv = cur.fetchall()
+    return render_template("infoAccount.html", info=rv)
 
 if __name__ == "__main__":
     app.run(debug=True)
