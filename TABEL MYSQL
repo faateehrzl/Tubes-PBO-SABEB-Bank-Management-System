@@ -40,8 +40,47 @@ CREATE TABLE information(
     -> );
 DESC information;
 
+CREATE TABLE UPDATEE(
+    -> update_email varchar(50) NOT NULL,
+    -> update_address varchar(50) NOT NULL,
+    -> update_phone int(20) NOT NULL
+    -> );
+desc UPDATEE;
+
 CREATE TABLE update_email(
     -> email varchar(50) NOT NULL
     -> );
 DESC update_email;
 
+CREATE TABLE update_address(
+    -> address varchar(50) NOT NULL
+    -> );
+DESC update_address;
+
+CREATE TABLE update_phone(
+    -> phone int(20) NOT NULL
+    -> );
+DESC update_phone;
+
+ CREATE TABLE account(
+    -> account_id char(10) NOT NULL,
+    -> costumer_id char(10) NOT NULL,
+    -> type char(10) NOT NULL,
+    -> balance varchar(20) NOT NULL
+    -> );
+DESC account;
+
+ CREATE TABLE Deposit(
+    -> amount int(20) NOT NULL
+    -> );
+DESC Deposit;
+
+CREATE TABLE BalanceAndQuery(
+    -> amount int(20) NOT NULL
+    -> );
+DESC BalanceAndQuery;
+
+CREATE TABLE withdraw(
+    -> amount int(20) NOT NULL
+    -> );
+DESC withdraw;
