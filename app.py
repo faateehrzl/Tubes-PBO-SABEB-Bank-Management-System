@@ -77,7 +77,7 @@ def logincustomer():
         return render_template("loginCustomer.html")
 
 @app.route('/halamanCustomer', methods=['GET'])
-def Custom():
+def customCustomer():
 
     return render_template("halamanCustomer.html")
 
@@ -112,12 +112,17 @@ def loginadmin():
         elif Username == rows[0][0] and Password == rows[0][1]:
             accept_Login = True
 
-            return render_template("halamanAdmin.html")
+            return redirect("/halamanAdmin")
         
         cur.close()
 
     else:
         return render_template("loginAdmin.html")
+
+@app.route('/halamanAdmin', methods=['GET'])
+def customAdmin():
+
+    return render_template("halamanAdmin.html")
 
 @app.route('/information', methods=['GET'])
 def information():
@@ -166,6 +171,13 @@ def infoAccount():
     cur.execute("SELECT account.Account_id, customer.Customer_name, account.Balance from account natural join customer")
     rv = cur.fetchall()
     return render_template("infoAccount.html", info=rv)
+
+@app.route('/infoTransaction', methods=['GET'])
+def infoTransaction():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * from Transaction")
+    rv = cur.fetchall()
+    return render_template("infoTransaction.html", info=rv)
 
 if __name__ == "__main__":
     app.run(debug=True)
