@@ -10,4 +10,4 @@ Untuk membuat dan menjalankan aplikasi ini ada beberapa hal yang diperlukan yait
 1. XAMPP
 2. Visual Studio Code
 3. Python 
-4. Framework pilihan seperti Flask / Django
+4. Framework pilihan seperti Flask
