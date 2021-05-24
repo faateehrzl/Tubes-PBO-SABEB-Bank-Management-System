@@ -1,0 +1,6 @@
+CREATE DATABASE BANKITA;
+USE BANKITA;
+CREATE TABLE register(
+    ->email string(50) NOT NULL,
+    ->
+)
