@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <form method="GET" action="/Account">
+            <title>Informasi</title>
+            <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='information.css')}}">
+    </head>
+    <body>
+        <table>
+            <th>Account ID</th>
+            <th>Customer Name</th>
+            <th>Amount</th>
+            <th>Data Time</th>
+            <th>Type Transaction</th>
+
+        {% for i in info %}
+         <tr>
+            <td>{{i[0]}}</td>
+            <td>{{i[1]}}</td>
+            <td>{{i[2]}}</td>
+            <td>{{i[3]}}</td>
+            <td>{{i[4]}}</td>
+         </tr>
+        {% endfor %}
+        </table>
+    </body>
+</html>

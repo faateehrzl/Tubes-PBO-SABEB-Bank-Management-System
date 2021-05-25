@@ -66,11 +66,11 @@ def logincustomer():
         else :
             accept_Login = True
 
-            query = 'select Account_id from account where Customer_id=\'%s\''
-            query = query % (Customer_id)
-            cur.execute(query)
-            temp = cur.fetchall()
-            simpanID = temp[0][0]
+            # query = 'select Customer_id from account where Customer_id=\'%s\''
+            # query = query % (Customer_id)
+            # cur.execute(query)
+            # temp = cur.fetchall()
+            simpanID = Customer_id
 
             return redirect("/halamanCustomer")
 
@@ -90,11 +90,13 @@ def deposit():
 
     if request.method == 'POST' :
         global simpanID
+        print(simpanID)
         Transaction_type = 'Deposit'
+        Account_id = request.form['account_id']
         Amount = request.form['amount']
         Data_time = datetime.datetime.now()
+        Customer_id = simpanID
         cur = mysql.connection.cursor()
-        Account_id = simpanID
 
         query = "select balance from account where account_id=\'%s\'"
         query = query % (Account_id)
@@ -105,7 +107,7 @@ def deposit():
         query = query % (balance,Account_id)
         cur.execute(query)
         mysql.connection.commit()
-        cur.execute("INSERT INTO transaction  (Account_id, Amount, Date_time , Transaction_type) VALUES (%s,%s,%s,%s)", (Account_id, Amount, Data_time, Transaction_type))
+        cur.execute("INSERT INTO transaction  (Account_id, Customer_id ,Amount, Data_time , Transaction_type) VALUES (%s,%s,%s,%s,%s)", (Account_id, Customer_id, Amount, Data_time, Transaction_type))
         mysql.connection.commit()
     
         cur.close()
@@ -119,10 +121,11 @@ def withdraw():
     if request.method == 'POST' :
         global simpanID
         Transaction_type = 'Withdraw'
+        Account_id = request.form['account_id']
         Amount = request.form['amount']
         Data_time = datetime.datetime.now()
+        Customer_id = simpanID
         cur = mysql.connection.cursor()
-        Account_id = simpanID
 
         query = "select balance from account where account_id=\'%s\'"
         query = query % (Account_id)
@@ -133,7 +136,7 @@ def withdraw():
         query = query % (balance,Account_id)
         cur.execute(query)
         mysql.connection.commit()
-        cur.execute("INSERT INTO transaction  (Account_id, Amount, Date_time , Transaction_type) VALUES (%s,%s,%s,%s)", (Account_id, Amount, Data_time, Transaction_type))
+        cur.execute("INSERT INTO transaction  (Account_id, Customer_id, Amount, Data_time , Transaction_type) VALUES (%s,%s,%s,%s,%s)", (Account_id, Customer_id, Amount, Data_time, Transaction_type))
         mysql.connection.commit()
     
         cur.close()
@@ -159,6 +162,32 @@ def tambahaccount():
 
     return render_template("tambahAccount.html")
 
+
+@app.route('/Account', methods=['GET'])
+def Account():
+
+    global simpanID
+    print(simpanID)
+    cur = mysql.connection.cursor()
+    query = 'select * from account where Customer_id=\'%s\''
+    query = query % (simpanID)
+    cur.execute(query)
+    temp = cur.fetchall()
+
+    return render_template("Account.html", info=temp)
+
+@app.route('/Transaction', methods=['GET'])
+def Transaction():
+
+    global simpanID
+    print(simpanID)
+    cur = mysql.connection.cursor()
+    query = 'select * from transaction where Customer_id=\'%s\''
+    query = query % (simpanID)
+    cur.execute(query)
+    temp = cur.fetchall()
+
+    return render_template("Transaction.html", info=temp)
 
 @app.route('/base.html/', methods=['GET'])
 def logoutcutomer():
