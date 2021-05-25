@@ -10,56 +10,13 @@ CREATE TABLE customer(
     );
 DESC customer;
 
-<<<<<<< HEAD
 CREATE TABLE AccountTransaction(
     account_id int(20) NOT NULL,
     data_time date NOT NULL,
     transaction_type varchar(50) NOT NULL,
-=======
-CREATE TABLE information(
-    customer_id int(20) NOT NULL,
-    customer_name varchar(50) NOT NULL,
-    address varchar(50) NOT NULL,
-    phone int(20) NOT NULL,
-    email varchar(50) NOT NULL
-    );
-DESC information;
-
-CREATE TABLE UPDATEE(
-    update_email varchar(50) NOT NULL,
-    update_address varchar(50) NOT NULL,
-    update_phone int(20) NOT NULL
-    );
-DESC UPDATEE;
-
-CREATE TABLE update_email(
-    email varchar(50) NOT NULL
-    );
-DESC update_email;
-
-CREATE TABLE update_address(
-    address varchar(50) NOT NULL
-    );
-DESC update_address;
-
-CREATE TABLE update_phone(
-    phone int(20) NOT NULL
-    );
-DESC update_phone;
-
-CREATE TABLE account(
-    account_id char(10) NOT NULL,
-    costumer_id char(10) NOT NULL,
-    type char(10) NOT NULL,
-    balance varchar(20) NOT NULL
-    );
-DESC account;
-
-CREATE TABLE Deposit(
->>>>>>> 848132df80a504ca4c6a9f9100940efdb639d412
     amount int(20) NOT NULL
 );
-DESC AccountTransaction;
+DESC TABLE AccountTransaction;
 
 CREATE account(
     account_id int(20) NOT NULL,
@@ -69,36 +26,29 @@ CREATE account(
 );
 DESC account;
 
-<<<<<<< HEAD
-CREATE SavingAcount(
+CREATE TABLE SavingAcount(
     withdraw int(20) NOT NULL,
     balanceEquiry int(20) NOT NULL,
     deposit int(20) NOT NULL
 );
 DESC SavingAcount;
 
-CREATE loan(
+CREATE TABLE loan(
     loan int(20) NOT NULL,
     balanceEquiry int(20) NOT NULL,
     deposit int(20) NOT NULL
 );
 DESC loan;
 
-CREATE CheckingAccount(
+CREATE TABLE CheckingAccount(
     deposit int(20) NOT NULL,
     balanceEquiry int(20) NOT NULL,
     checkingBalance int(20) NOT NULL
 );
 DESC CheckingAccount;
 
-CREATE Admin(
+CREATE TABLE Admin(
     username varchar(50) NOT NULL,
     password varchar(50) NOT NULL
 );
 DESC Admin;
-=======
-CREATE TABLE withdraw(
-    amount int(20) NOT NULL
-    );
-DESC withdraw;
->>>>>>> 848132df80a504ca4c6a9f9100940efdb639d412
