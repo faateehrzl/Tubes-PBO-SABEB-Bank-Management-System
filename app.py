@@ -1,4 +1,4 @@
-from flask import Flask, render_template,request,redirect,url_for
+from flask import Flask, render_template,request,redirect
 from flask_mysqldb import MySQL,MySQLdb
 import datetime
 
@@ -65,11 +65,7 @@ def logincustomer():
             
         else :
             accept_Login = True
-
-            # query = 'select Customer_id from account where Customer_id=\'%s\''
-            # query = query % (Customer_id)
-            # cur.execute(query)
-            # temp = cur.fetchall()
+            
             simpanID = Customer_id
 
             return redirect("/halamanCustomer")
