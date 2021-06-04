@@ -1,6 +1,7 @@
 from flask import Flask, render_template,request,redirect
 from flask_mysqldb import MySQL,MySQLdb
 import datetime
+from user import *
 
 app = Flask(__name__)
 
@@ -45,6 +46,7 @@ def logincustomer():
 
     if request.method == 'POST' :
         global simpanID
+
         
         Customer_id = request.form['customer_id']
         Password = request.form['password']
@@ -66,7 +68,8 @@ def logincustomer():
         else :
             accept_Login = True
             
-            simpanID = Customer_id
+            simpanID = customer(Customer_id,Password)
+            simpanID.info()
 
             return redirect("/halamanCustomer")
 
@@ -91,7 +94,7 @@ def deposit():
         Account_id = request.form['account_id']
         Amount = request.form['amount']
         Data_time = datetime.datetime.now()
-        Customer_id = simpanID
+        Customer_id = simpanID.cus_id()
         cur = mysql.connection.cursor()
 
         query = "select balance from account where account_id=\'%s\'"
@@ -120,7 +123,7 @@ def withdraw():
         Account_id = request.form['account_id']
         Amount = request.form['amount']
         Data_time = datetime.datetime.now()
-        Customer_id = simpanID
+        Customer_id = simpanID.cus_id()
         cur = mysql.connection.cursor()
 
         query = "select balance from account where account_id=\'%s\'"
@@ -166,7 +169,7 @@ def Account():
     print(simpanID)
     cur = mysql.connection.cursor()
     query = 'select * from account where Customer_id=\'%s\''
-    query = query % (simpanID)
+    query = query % (simpanID.cus_id())
     cur.execute(query)
     temp = cur.fetchall()
 
@@ -179,7 +182,7 @@ def Transaction():
     print(simpanID)
     cur = mysql.connection.cursor()
     query = 'select * from transaction where Customer_id=\'%s\''
-    query = query % (simpanID)
+    query = query % (simpanID.cus_id())
     cur.execute(query)
     temp = cur.fetchall()
 
@@ -195,6 +198,7 @@ def loginadmin():
 
     
     if request.method == 'POST' :
+        global AdminID
         Username = request.form['username']
         Password = request.form['password']
         
@@ -215,6 +219,9 @@ def loginadmin():
             return render_template("loginAdmin.html")
         elif Username == rows[0][0] and Password == rows[0][1]:
             accept_Login = True
+
+            AdminID = admin(Username)
+            AdminID.info()
 
             return redirect("/halamanAdmin")
         
